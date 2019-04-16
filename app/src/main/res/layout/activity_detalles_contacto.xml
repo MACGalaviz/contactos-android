@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetallesContacto"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".1"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:background="@color/whitee"
+            android:id="@+id/tvNombre"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Nombre"
+            android:gravity="center"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".5"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:layout_margin="10dp"
+            android:id="@+id/btnLlamar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Llamar \nContacto"
+            android:layout_weight="1"
+            android:background="@drawable/call"/>
+        <Button
+            android:layout_margin="10dp"
+            android:id="@+id/btnEmail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Enviar \nEmail"
+            android:layout_weight="1"
+            android:background="@drawable/email"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".5"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:layout_margin="10dp"
+        android:id="@+id/btnEditar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Editar \nContacto"
+        android:layout_weight="1"
+        android:background="@drawable/contract"
+        />
+        <Button
+            android:layout_margin="10dp"
+            android:id="@+id/btnSms"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Enviar \nSMS"
+            android:layout_weight="1"
+            android:background="@drawable/bubble"
+            />
+    </LinearLayout>
+</LinearLayout>

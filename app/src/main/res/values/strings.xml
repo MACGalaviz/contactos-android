@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Contactos</string>
+    <string-array name="ElementosMenuContextual">
+        <item>Editar</item>
+        <item>Eliminar</item>
+        <item>Llamar</item>
+        <item>Email</item>
+        <item>SMS</item>
+    </string-array>
+</resources>
