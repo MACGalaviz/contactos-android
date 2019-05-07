@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ListView lvContactos;
     Button btnAgregarContacto;
     Button btnReset;
+    Button btnAgregarContactos;
 
     // Declaración de adaptador
     Adaptador adaptador;
@@ -55,7 +56,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnAgregarContacto.setOnClickListener(this);
         btnReset = findViewById(R.id.btnReset);
         btnReset.setOnClickListener(this);
-
+        btnAgregarContactos = findViewById(R.id.btnAgregarContactos);
+        btnAgregarContactos.setOnClickListener(this);
         /*// Agregamos datos Todo Temporal
         llenadoDeContactos();*/
 
@@ -130,9 +132,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnReset:
-                reset = true;
-                Intent r = new Intent(MainActivity.this,MainActivity.class);
-                startActivity(r);
+                AlertDialog.Builder siono = new AlertDialog.Builder(this);
+                siono.setTitle("Eliminar Contactos");
+                siono.setMessage("¿Estás seguro de que deseas borrar todos los contactos?");
+                siono.setCancelable(false);
+                siono.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface siono, int which) {
+                    }
+                });
+                siono.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface siono, int which) {
+                        reset = true;
+                        Intent r = new Intent(MainActivity.this,MainActivity.class);
+                        startActivity(r);
+                    }
+                });
+                siono.show();
+                break;
+            case R.id.btnAgregarContactos:
+                AlertDialog.Builder siono1 = new AlertDialog.Builder(this);
+                siono1.setTitle("Agregar Contactos por Defecto");
+                siono1.setMessage("¿Estás seguro de que deseas agregar los contactos por defecto?");
+                siono1.setCancelable(false);
+                siono1.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface siono1, int which) {
+                    }
+                });
+                siono1.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface siono1, int which) {
+                        listaContactos.add(new Contactos("Juan Perez","668111116","perecito@hotmail.com"));
+                        listaContactos.add(new Contactos("Santa Ana","66333337","santanita@hotmail.com"));
+                        listaContactos.add(new Contactos("Maria Elena","6683455662","mariaelenita@hotmail.com"));
+                        listaContactos.add(new Contactos("José David","6698237642344","davidsitop8@hotmail.com"));
+                        Intent i = new Intent(MainActivity.this,MainActivity.class);
+                        startActivity(i);
+                    }
+                });
+                siono1.show();
                 break;
         }
     }
@@ -229,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case 1:
                 final int fposition = infoContacto.position;
                 AlertDialog.Builder siono = new AlertDialog.Builder(this);
-                siono.setTitle("Eliminar");
+                siono.setTitle("Eliminar Contacto");
                 siono.setMessage("¿Estás seguro de que deseas eliminar este contacto?");
                 siono.setCancelable(false);
                 siono.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -306,4 +346,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+
+
+
 }

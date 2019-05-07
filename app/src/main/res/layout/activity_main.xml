@@ -60,10 +60,18 @@
         >
         <Button
             android:layout_margin="10dp"
+            android:id="@+id/btnAgregarContactos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Agregar \nContactos"
+            android:layout_weight="1"
+            android:background="@drawable/plusplus"/>
+        <Button
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/btnReset"
-            android:text="Reset"
+            android:text="Borrar \nContactos"
             android:layout_weight="1"
             android:background="@drawable/file"/>
         <Button
