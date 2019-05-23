@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -46,11 +47,12 @@ public class Adaptador extends BaseAdapter {
         TextView tvName = layoutAdapter.findViewById(R.id.tvName);
         TextView tvPhone = layoutAdapter.findViewById(R.id.tvPhone);
         TextView tvEmail = layoutAdapter.findViewById(R.id.tvEmail);
+        ImageView ivImagen = layoutAdapter.findViewById(R.id.ivImagen);
 
         tvName.setText(listaContactos.get(position).getNombre());
         tvPhone.setText("Teléfono: "+listaContactos.get(position).getTelefono());
         tvEmail.setText("E-mail: "+listaContactos.get(position).getEmail());
-
+        ivImagen.setImageURI(listaContactos.get(position).getImageUri());
 
         return layoutAdapter;
     }

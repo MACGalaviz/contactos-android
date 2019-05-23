@@ -75,9 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            }
 
             // Iterar el arreglo para alimentar ArrayList de clase Contactos
-            for (int i = 0; i<=arreglo.length-1; i+=3)
+            for (int i = 0; i<=arreglo.length-1; i+=4)
             {
-                listaContactos.add(new Contactos(arreglo[i],arreglo[i+1],arreglo[i+2]));
+                listaContactos.add(new Contactos(arreglo[i],arreglo[i+1],arreglo[i+2],Uri.parse(arreglo[i+3])));
             }
            /* // Iterar ArrayList para conocer el contenido TODO Temporal
             for (int i=0; i<=listaContactos.size()-1; i++)
@@ -108,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 w.putExtra("telefono",listaContactos.get(position).getTelefono());
                 w.putExtra("email", listaContactos.get(position).getEmail());
                 w.putExtra("position", String.valueOf(position));
+                w.putExtra("imageUri", listaContactos.get(position).getImageUri().toString());
+
                 //startActivity(w);
                 startActivityForResult(w,2);
             }
@@ -164,10 +166,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 siono1.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface siono1, int which) {
-                        listaContactos.add(new Contactos("Juan Perez","668111116","perecito@hotmail.com"));
-                        listaContactos.add(new Contactos("Santa Ana","66333337","santanita@hotmail.com"));
-                        listaContactos.add(new Contactos("Maria Elena","6683455662","mariaelenita@hotmail.com"));
-                        listaContactos.add(new Contactos("José David","6698237642344","davidsitop8@hotmail.com"));
+//                        listaContactos.add(new Contactos("Juan Perez","668111116","perecito@hotmail.com"));
+//                        listaContactos.add(new Contactos("Santa Ana","66333337","santanita@hotmail.com"));
+//                        listaContactos.add(new Contactos("Maria Elena","6683455662","mariaelenita@hotmail.com"));
+//                        listaContactos.add(new Contactos("José David","6698237642344","davidsitop8@hotmail.com"));
                         Intent i = new Intent(MainActivity.this,MainActivity.class);
                         startActivity(i);
                     }
@@ -189,8 +191,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     String nombre = data.getExtras().getString("nombre");
                     String telefono = data.getExtras().getString("telefono");
                     String email = data.getExtras().getString("email");
+                    Uri imageUri = Uri.parse(data.getExtras().getString("imageUri"));
                     // Agregar datos a la lista de contactos
-                    listaContactos.add(new Contactos(nombre,telefono,email));
+                    listaContactos.add(new Contactos(nombre,telefono,email,imageUri));
                     /*// Toas para ver si se reciben los datos // TODO Temporal
                     Toast.makeText(this, nombre+telefono+email, Toast.LENGTH_SHORT).show();*/
                     Intent i = new Intent(MainActivity.this,MainActivity.class);
@@ -208,10 +211,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     String telefono = data.getExtras().getString("telefono");
                     String email = data.getExtras().getString("email");
                     String position = data.getExtras().getString("position");
+                    //TODO Supongo
+                    Uri imageUri = Uri.parse(data.getExtras().getString("imageUri"));
                     // Agregar datos a la lista de contactos
                     listaContactos.get(Integer.valueOf(position)).setNombre(nombre);
                     listaContactos.get(Integer.valueOf(position)).setTelefono(telefono);
                     listaContactos.get(Integer.valueOf(position)).setEmail(email);
+                    listaContactos.get(Integer.valueOf(position)).setImageUri(imageUri);
+
                     /*// Toas para ver si se reciben los datos // TODO Temporal
                     Toast.makeText(this, nombre+telefono+email, Toast.LENGTH_SHORT).show();*/
                     Intent i = new Intent(MainActivity.this,MainActivity.class);
@@ -336,7 +343,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 archivo.agregar(listaContactos.get(i).getNombre()
                         +"|"+listaContactos.get(i).getTelefono()
-                        +"|"+listaContactos.get(i).getEmail()+"|");
+                        +"|"+listaContactos.get(i).getEmail()
+                        +"|"+listaContactos.get(i).getImageUri().toString()+"|");
                 /*// Mostrar contenido del ArrayList listaContactos al ser iterado TODO Temporal
                 Toast.makeText(this, "", Toast.LENGTH_SHORT).show();*/
             }

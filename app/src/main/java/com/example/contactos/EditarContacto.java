@@ -1,6 +1,7 @@
 package com.example.contactos;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class EditarContacto extends AppCompatActivity implements View.OnClickListener {
+    // Declaración de variable para el resultado del uso de la galería
+    public static final int RESULT_GALLERY = 0;
+
     EditText etNombre, etTelefono, etEmail;
     Button btnOk, btnCancelar;
 
@@ -17,6 +21,11 @@ public class EditarContacto extends AppCompatActivity implements View.OnClickLis
     String telefono;
     String email ;
     String position;
+    // Declaración de variable para la url de la imagen
+    Uri imageUri;
+
+    // Definición de variables
+    Button btnImagen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +39,8 @@ public class EditarContacto extends AppCompatActivity implements View.OnClickLis
         btnOk.setOnClickListener(this);
         btnCancelar = findViewById(R.id.btnCancelar);
         btnCancelar.setOnClickListener(this);
+        btnImagen = findViewById(R.id.btnImagen);
+        btnImagen.setOnClickListener(this);
         try {
             Bundle datos = getIntent().getExtras();
             // Variables para obtener los datos // TODO Me gustaria quitarlo
@@ -41,6 +52,7 @@ public class EditarContacto extends AppCompatActivity implements View.OnClickLis
             etNombre.setText(nombre);
             etTelefono.setText(telefono);
             etEmail.setText(email);
+            imageUri = Uri.parse(datos.getString("imageUri"));
             //Toast.makeText(this, nombre+telefono+email+position, Toast.LENGTH_SHORT).show();
         }catch(Exception e){}
         //Toast.makeText(this, position, Toast.LENGTH_SHORT).show();
@@ -53,7 +65,8 @@ public class EditarContacto extends AppCompatActivity implements View.OnClickLis
             case R.id.btnOk:
                 if (!etNombre.getText().toString().equals("")
                         && !etTelefono.getText().toString().equals("")
-                        && !etEmail.getText().toString().equals("")) {
+                        && !etEmail.getText().toString().equals("")
+                        && !imageUri.toString().equals("")){
 
                     Intent a = new Intent(EditarContacto.this, MainActivity.class);
 
@@ -72,6 +85,7 @@ public class EditarContacto extends AppCompatActivity implements View.OnClickLis
                     a.putExtra("telefono", telefono);
                     a.putExtra("email", email);
                     a.putExtra("position", position);
+                    a.putExtra("imageUri",imageUri.toString());
                     setResult(RESULT_OK, a);
                     finish();
                 }
@@ -81,19 +95,24 @@ public class EditarContacto extends AppCompatActivity implements View.OnClickLis
                 setResult(RESULT_CANCELED,b);
                 finish();
                 break;
+
+            case R.id.btnImagen:
+                Intent galleryIntent = new Intent( Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI); startActivityForResult(galleryIntent , RESULT_GALLERY );
+                break;
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    // Metodo para obtener la url de la imagen
+    @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode)
-        {
-            case 1:
-                // TODO codigo para agregar
-                break;
-            case 2:
-                // TODO codigo para editar
+        switch (requestCode) {
+            case RESULT_GALLERY :
+                if (null != data) {
+                    // Obtener la url de la imagen
+                    imageUri = data.getData();
+                    Toast.makeText(this, imageUri.toString(), Toast.LENGTH_SHORT).show();
+                } break;
+            default:
                 break;
         }
     }

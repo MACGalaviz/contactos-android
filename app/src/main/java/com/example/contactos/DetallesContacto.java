@@ -107,6 +107,7 @@ public class DetallesContacto extends AppCompatActivity implements View.OnClickL
     String telefono;
     String email ;
     String position;
+    String imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +122,7 @@ public class DetallesContacto extends AppCompatActivity implements View.OnClickL
         btnEditar.setOnClickListener(this);
         btnSms = findViewById(R.id.btnSms);
         btnSms.setOnClickListener(this);
+
         try {
             Bundle datos = getIntent().getExtras();
             // Variables para obtener los datos // TODO Me gustaria quitarlo
@@ -128,8 +130,10 @@ public class DetallesContacto extends AppCompatActivity implements View.OnClickL
             telefono = datos.getString("telefono");
             email = datos.getString("email");
             position = datos.getString("position");
+            imageUri = datos.getString("imageUri");
             // Toas para ver si se reciben los datos // TODO Temporal
             tvNombre.setText(nombre);
+
             //Toast.makeText(this, nombre+telefono+email+position, Toast.LENGTH_SHORT).show();
         }catch(Exception e){}
 
@@ -159,6 +163,8 @@ public class DetallesContacto extends AppCompatActivity implements View.OnClickL
                 i.putExtra("telefono",telefono);
                 i.putExtra("email", email);
                 i.putExtra("position", position);
+                i.putExtra("imageUri", imageUri);
+
                 startActivityForResult(i,2);
                 break;
             case R.id.btnSms:
@@ -183,6 +189,7 @@ public class DetallesContacto extends AppCompatActivity implements View.OnClickL
                     a.putExtra("telefono",data.getExtras().getString("telefono"));
                     a.putExtra("email",data.getExtras().getString("email"));
                     a.putExtra("position",data.getExtras().getString("position"));
+                    a.putExtra("imageUri",data.getExtras().getString("imageUri"));
                     setResult(RESULT_OK,a);
                     finish();
                 }

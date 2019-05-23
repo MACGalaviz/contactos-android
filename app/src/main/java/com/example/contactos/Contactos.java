@@ -1,9 +1,19 @@
 package com.example.contactos;
 
+import android.net.Uri;
+
 import java.util.Comparator;
 
 public class Contactos {
     private String nombre, telefono, email;
+    private Uri imageUri;
+
+    public Contactos(String nombre, String telefono, String email, Uri imageUri) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.email = email;
+        this.imageUri = imageUri;
+    }
 
     public String getNombre() {
         return nombre;
@@ -29,11 +39,14 @@ public class Contactos {
         this.email = email;
     }
 
-    public Contactos(String nombre, String telefono, String email) {
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.email = email;
+    public Uri getImageUri() {
+        return imageUri;
     }
+
+    public void setImageUri(Uri imageUri) {
+        this.imageUri = imageUri;
+    }
+
     public static Comparator<Contactos> ContactosComparator
             = new Comparator<Contactos>() {
         @Override
